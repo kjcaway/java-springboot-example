@@ -30,4 +30,6 @@ $(document).ready(function () {
     });
 
     $("#addCardBtn").on("click", MAIN.onAddCardClick);
+    console.log(CURRENT_ENV);
+    console.log(OTHER_SERVICE_URL);
 });
