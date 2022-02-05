@@ -14,7 +14,7 @@ Made to figure out how to use java, springboot(mvc), etc.
 
 ## How to use
 - AOP with Annotation
-- Static resource
+- Handle static resource
 - Utils
 - Etc...
 
