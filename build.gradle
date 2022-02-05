@@ -31,6 +31,9 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
+	/** apache common **/
+	implementation 'commons-io:commons-io:2.8.0'
+
 	/** test **/
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
