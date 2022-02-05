@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="../lib/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="./index.css" />
+
+    <!-- Component -->
+    <link rel="import" href="../components/comp-navi.html">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <comp-navi></comp-navi>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa fa-align-left"></i>
+                        <span>사이드바 접기</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">서브페이지1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">서브페이지2</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <h2>메인 컨텐츠 제목1</h2>
+            <p>메인 컨텐츠1</p>
+
+            <div class="line"></div>
+
+            <h2>메인 컨텐츠 제목2</h2>
+            <p>메인컨텐츠2</p>
+
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary" id="addCardBtn">
+                        카드 추가
+                    </button>
+                </div>
+            </div>
+            <div class="overflow-auto row row-flex mt-2" id="cardGroupDiv">
+                <div class="col-sm-3 mt-2">
+                    <div class="card h-green-p">
+                        <div class="card-body">
+                            <h5 class="card-title">제목1</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">서브제목</h6>
+                            <p class="card-text">블라블라</p>
+                            <a href="#" class="card-link h-red">Red</a>
+                            <a href="#" class="card-link h-green">Green</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 mt-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">제목</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">서브제목</h6>
+                            <p class="card-text">블라블라</p>
+                            <a href="#" class="card-link">Red</a>
+                            <a href="#" class="card-link">Green</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Common -->
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../lib/bootstrap.min.js"></script>
+
+    <!-- Main -->
+    <script src="index.js"></script>
+
+    <script>
+        (function (global) {
+            'use strict';
+
+            var document = global.document;
+            var is_support_register = 'registerElement' in document;
+            var is_support_import = 'import' in document.createElement('link');
+            var is_support_template = 'content' in document.createElement('template');
+
+            if (!is_support_register || !is_support_import || !is_support_template) {
+                var polyfill = document.createElement('script');
+                polyfill.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.2/webcomponents-lite.js';
+                document.body.appendChild(polyfill);
+            }
+
+        })(window);
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <title></title>
+    <!-- Common -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="../lib/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="./index.css" />
+    <link type="text/css" rel="stylesheet" href="./contents_one.css" />
+
+    <!-- Component -->
+    <link rel="import" href="../components/comp-navi.html">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <comp-navi></comp-navi>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa fa-align-left"></i>
+                        <span>사이드바 접기</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <h2>복잡한 입력 폼 예제</h2>
+            <div class="row">
+                <div class="col-lg-4 bg-light">
+                    111111
+                </div>
+                <div class="col-lg-8 bg-light">
+
+                    <div class="panel-group" id="accordion">
+                        <div class="panel border">
+                            <div class="panel-heading" id="headingOne" role="tab">
+                                <div class="row panel-title">
+                                    <label for="product" class="col-lg-2 col-form-label required">제품군</label>
+                                    <div class="col-lg-10 d-flex flex-row">
+                                        <!-- 제품군 -->
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons" id="productGroupDiv">
+                                        </div>
+                                        <input type="text" class="form-control ml-1" id="productSearchText" placeholder="검색할 단어를 입력하세요.(2자이상)">
+                                    </div>
+                                </div>
+                                <div class="panel-collapse collapse in bg-gray" id="collapseOne" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body pl-4">
+                                        <!-- 제품 -->
+                                        <div class='form-check form-check-inline row' id="productDiv">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel border">
+                            <div class="panel-heading" id="headingTwo" role="tab">
+                                <div class="row panel-title">
+                                    <label for="product" class="col-lg-2 col-form-label required">서비스</label>
+                                </div>
+                                <div class="panel-collapse collapse in bg-gray" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body pl-4" id="serviceDiv">
+                                        <!-- 서비스 목록 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel border">
+                            <div class="panel-heading" id="headingThird" role="tab">
+                                <div class="row panel-title">
+                                    <label for="product" class="col-lg-2 col-form-label required">선택된 서비스</label>
+                                </div>
+                                <div class="panel-collapse collapse in bg-gray" id="collapseThird" role="tabpanel" aria-labelledby="headingThird">
+                                    <div class="panel-body pl-4" id="selectedServiceDiv">
+                                        <!-- 선택된 서비스 목록 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Common -->
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../lib/bootstrap.min.js"></script>
+
+    <!-- Main -->
+    <script src="./contents_one.js"></script>
+
+    <script>
+        (function (global) {
+            'use strict';
+
+            var document = global.document;
+            var is_support_register = 'registerElement' in document;
+            var is_support_import = 'import' in document.createElement('link');
+            var is_support_template = 'content' in document.createElement('template');
+
+            if (!is_support_register || !is_support_import || !is_support_template) {
+                var polyfill = document.createElement('script');
+                polyfill.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.2/webcomponents-lite.js';
+                document.body.appendChild(polyfill);
+            }
+
+        })(window);
+    </script>
+</body>
+</html>

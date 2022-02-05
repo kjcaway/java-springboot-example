@@ -6,13 +6,15 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("${demo.api}/hello")
 public class HelloController {
     private static final Logger logger = LogManager.getLogger(HelloController.class);
 
-    @GetMapping("/hello")
+    @GetMapping()
     public String hello(){
         logger.info("request /hello!");
         return "Hello World!";
