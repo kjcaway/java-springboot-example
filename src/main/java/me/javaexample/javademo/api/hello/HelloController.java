@@ -2,11 +2,13 @@ package me.javaexample.javademo.api.hello;
 
 import me.javaexample.javademo.annotation.AuditLogAnnotation;
 import me.javaexample.javademo.api.base.ApiResult;
+import me.javaexample.javademo.exception.CustomException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +39,17 @@ public class HelloController {
     public ApiResult<?> json(){
         Member member = new Member(1,"test");
         return ApiResult.ok(member);
+    }
+
+    @GetMapping("/exception/{value}")
+    public ApiResult<?> exception(@PathVariable String value){
+        try {
+            int id = Integer.parseInt(value);
+            Member member = new Member(id,"test");
+            return ApiResult.ok(member);
+        } catch (Exception ex){
+            throw new CustomException("Something was wrong!");
+        }
     }
 
     // Sample Response DTO
