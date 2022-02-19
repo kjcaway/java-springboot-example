@@ -1,6 +1,7 @@
 package me.javaexample.javademo.api.hello;
 
 import me.javaexample.javademo.annotation.AuditLogAnnotation;
+import me.javaexample.javademo.api.base.ApiResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -30,5 +31,22 @@ public class HelloController {
     @GetMapping("/audit")
     public String audit(){
         return "This is audit log test!";
+    }
+
+    @GetMapping("/json")
+    public ApiResult<?> json(){
+        Member member = new Member(1,"test");
+        return ApiResult.ok(member);
+    }
+
+    // Sample Response DTO
+    class Member{
+        public int id;
+        public String name;
+
+        Member(int id, String name){
+            this.id = id;
+            this.name = name;
+        }
     }
 }
