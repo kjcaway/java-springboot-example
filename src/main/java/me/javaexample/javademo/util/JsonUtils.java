@@ -8,7 +8,8 @@ import java.util.Map;
 public class JsonUtils {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
-    static final TypeReference<Map<String, Object>> typeOfMap = new TypeReference<Map<String, Object>>() {};
+    static final TypeReference<Map<String, Object>> typeOfMap = new TypeReference<>() {
+    };
 
     public static <T> T convertToObject(String json, Class<T> type) throws Exception {
         try {
@@ -18,7 +19,7 @@ public class JsonUtils {
         }
     }
 
-    public static String convertToJsonStr(Object obj) throws Exception  {
+    public static String convertToJsonStr(Object obj) throws Exception {
         try {
             return objectMapper.writeValueAsString(obj);
         } catch (Exception e) {
