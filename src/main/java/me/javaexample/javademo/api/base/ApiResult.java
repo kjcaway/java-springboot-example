@@ -22,7 +22,7 @@ public class ApiResult<T> {
         this.error = null;
     }
 
-    public ApiResult(ApiResultCode code, String erorr){
+    public ApiResult(ApiResultCode code, String error){
         this.code = code;
         this.data = null;
         this.error = error;
