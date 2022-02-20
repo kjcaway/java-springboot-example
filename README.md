@@ -21,5 +21,10 @@ Made to figure out how to use java, springboot(mvc), etc.
 - Log4j2
 - Utils
 - Docker build
+    ```bash
+  docker build -t {imageName}:{version} .
+  docker run -d -p 8080:8080 {imageName}:{version}
+  docker ps
+    ```
 - Etc...
 
