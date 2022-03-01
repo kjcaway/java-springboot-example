@@ -5,6 +5,7 @@ import me.javaexample.javademo.api.base.ApiResult;
 import me.javaexample.javademo.exception.CustomException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +13,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("${demo.api}/hello")
 public class HelloController {
+
     private static final Logger logger = LogManager.getLogger(HelloController.class);
+
+    @Value("${otherservice.url:unknown}")
+    String otherServiceUrl;
 
     @GetMapping()
     public String hello(){
@@ -50,6 +57,11 @@ public class HelloController {
         } catch (Exception ex){
             throw new CustomException("Something was wrong!");
         }
+    }
+
+    @GetMapping("/proptest")
+    public ApiResult<?> proptest(){
+        return ApiResult.ok(Map.of("otherServiceUrl", otherServiceUrl));
     }
 
     // Sample Response DTO
