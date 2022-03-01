@@ -2,9 +2,11 @@ package me.javaexample.javademo.api.hello;
 
 import me.javaexample.javademo.annotation.AuditLogAnnotation;
 import me.javaexample.javademo.api.base.ApiResult;
+import me.javaexample.javademo.config.AppConfig;
 import me.javaexample.javademo.exception.CustomException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,9 @@ public class HelloController {
 
     @Value("${otherservice.url:unknown}")
     String otherServiceUrl;
+
+    @Autowired
+    AppConfig appConfig;
 
     @GetMapping()
     public String hello(){
@@ -62,6 +67,13 @@ public class HelloController {
     @GetMapping("/proptest")
     public ApiResult<?> proptest(){
         return ApiResult.ok(Map.of("otherServiceUrl", otherServiceUrl));
+    }
+
+    @GetMapping("/proptest2")
+    public ApiResult<?> proptest2(){
+        logger.info(appConfig.toString());
+        return ApiResult.ok(Map.of("appConfig.userName", appConfig.getUserName(),
+                                    "appConfig.userPassword", appConfig.getUserPassword()));
     }
 
     // Sample Response DTO

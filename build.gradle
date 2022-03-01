@@ -33,6 +33,7 @@ dependencies {
 
 	/** apache common **/
 	implementation 'commons-io:commons-io:2.8.0'
+	implementation 'org.apache.commons:commons-lang3:3.0'
 
 	/** test **/
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
