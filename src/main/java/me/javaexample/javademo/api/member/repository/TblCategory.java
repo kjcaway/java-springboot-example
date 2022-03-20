@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @Entity(name = "tbl_category")
 public class TblCategory {
     @Id
-    @Column(name = "cateogry_id")
+    @Column(name = "category_id")
     private String categoryId;
 
     @Column

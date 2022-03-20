@@ -29,4 +29,10 @@ public class MemberController {
         memberService.insertMember(memberDto);
         return ApiResult.ok();
     }
+
+    @GetMapping("/search")
+    public ApiResult<?> getMembersByCategory(@RequestParam String category){
+        List<MemberDto> result = memberService.getMembersByCategory(category);
+        return ApiResult.ok(result);
+    }
 }
