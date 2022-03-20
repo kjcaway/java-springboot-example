@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.5.8'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10" // (1)
 }
 
 group = 'me.javaexample'
@@ -38,6 +39,9 @@ dependencies {
 	/** swagger 3.0 **/
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
+	/** querydsl **/
+	implementation 'com.querydsl:querydsl-jpa' // (2)
+
 	/** apache common **/
 	implementation 'commons-io:commons-io:2.8.0'
 	implementation 'org.apache.commons:commons-lang3:3.0'
@@ -46,6 +50,28 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 }
+
+def querydslDir = "$buildDir/generated/querydsl" // (3)
+
+querydsl { // (4)
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+
+sourceSets { // (5)
+	main.java.srcDir querydslDir
+}
+
+configurations { // (6)
+	querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl { // (7)
+	options.annotationProcessorPath = configurations.querydsl
+}
+
+/** * comileQuerydsl.doFirst 추가 */
+compileQuerydsl.doFirst { if(file(querydslDir).exists() ) delete(file(querydslDir)) }
 
 test {
 	useJUnitPlatform()
