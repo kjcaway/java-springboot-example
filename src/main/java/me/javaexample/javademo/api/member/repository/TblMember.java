@@ -23,8 +23,12 @@ public class TblMember {
     @Column(nullable = false, length = 100)
     private String email;
 
+    @Column()
+    private String category;
+
     public TblMember(MemberDto dto){
         this.name = dto.getName();
         this.email = dto.getEmail();
+        this.category = dto.getCategory();
     }
 }
