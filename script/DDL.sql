@@ -11,6 +11,6 @@ CREATE TABLE `tbl_member`
     `id`       int         NOT NULL AUTO_INCREMENT,
     `name`     varchar(45) NOT NULL,
     `email`    varchar(45) NOT NULL,
-    `category` tinyint DEFAULT NULL,
+    `category` varchar(45) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3

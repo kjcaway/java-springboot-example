@@ -1,5 +1,6 @@
 package me.javaexample.javademo.api.member.service;
 
+import com.mysql.cj.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import me.javaexample.javademo.api.member.dto.MemberDto;
 import me.javaexample.javademo.api.member.repository.TblMember;
@@ -25,6 +26,9 @@ public class MemberService {
 
     @Transactional
     public void insertMember(MemberDto memberDto){
+        if(StringUtils.isNullOrEmpty(memberDto.getCategory())){
+            memberDto.setDefaultCategory();
+        }
         memberRepository.save(new TblMember(memberDto));
     }
 }

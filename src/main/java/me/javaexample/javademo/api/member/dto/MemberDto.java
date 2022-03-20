@@ -16,4 +16,8 @@ public class MemberDto {
         this.email = member.getEmail();
         this.category = member.getCategory();
     }
+    
+    public void setDefaultCategory(){
+        this.category = "M001"; // 학생 카테고리
+    }
 }
