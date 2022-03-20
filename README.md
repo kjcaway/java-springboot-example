@@ -12,8 +12,11 @@ Made to figure out how to use java, springboot(mvc), etc.
 - docker desktop
 - springboot 2.5.8
 - gradle 7.3
+- mysql 8.0.28
 
 ## What Sampling
+- JPA
+- QueryDSL
 - AOP with Annotation
 - Handle static resource
 - Basic Api Response
