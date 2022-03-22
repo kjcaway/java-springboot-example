@@ -17,7 +17,7 @@ import javax.annotation.PostConstruct;
  * if field name is conflict like "userName(in environment)", it cannot be set upper
  */
 @Configuration
-@PropertySource(value = "file:/var/config/config.json", factory = JsonPropertiesParseFactory.class)
+@PropertySource(value = "file:/var/config/config.json", factory = JsonPropertiesParseFactory.class, ignoreResourceNotFound = true)
 public class AppConfig {
 
     private String userName;

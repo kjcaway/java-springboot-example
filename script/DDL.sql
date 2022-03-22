@@ -4,7 +4,7 @@ CREATE TABLE `tbl_category`
     `type`        varchar(45) NOT NULL,
     `name`        varchar(45) NOT NULL,
     PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 CREATE TABLE `tbl_member`
 (
@@ -13,4 +13,4 @@ CREATE TABLE `tbl_member`
     `email`    varchar(45) NOT NULL,
     `category` varchar(45) DEFAULT NULL,
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
