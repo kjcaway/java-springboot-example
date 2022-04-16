@@ -6,10 +6,13 @@ import me.javaexample.javademo.api.member.dto.MemberDto;
 import me.javaexample.javademo.api.member.repository.TblMember;
 import me.javaexample.javademo.api.member.repository.TblMemberQueryRepository;
 import me.javaexample.javademo.api.member.repository.TblMemberRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,6 +35,20 @@ public class MemberService {
                 .map(MemberDto::new)
                 .collect(Collectors.toList());
         return result;
+    }
+
+    public Map<String, ?> getMembersPaging(Pageable pageable){
+        Page<TblMember> page = memberQueryRepository.findMemberByPage(pageable);
+        List<MemberDto> result = page
+                .stream()
+                .map(MemberDto::new)
+                .collect(Collectors.toList());
+
+
+        return Map.of(
+                "list", result,
+                "totalcount", page.getTotalElements()
+        );
     }
 
     @Transactional
