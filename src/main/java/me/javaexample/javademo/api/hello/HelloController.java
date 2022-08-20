@@ -1,7 +1,9 @@
 package me.javaexample.javademo.api.hello;
 
+import lombok.RequiredArgsConstructor;
 import me.javaexample.javademo.annotation.AuditLogAnnotation;
 import me.javaexample.javademo.api.base.ApiResult;
+import me.javaexample.javademo.api.hello.service.HelloService;
 import me.javaexample.javademo.config.AppConfig;
 import me.javaexample.javademo.exception.CustomException;
 import org.apache.logging.log4j.LogManager;
@@ -18,10 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("${demo.api}/hello")
 public class HelloController {
 
     private static final Logger logger = LogManager.getLogger(HelloController.class);
+    private final HelloService helloService;
 
     @Value("${otherservice.url:unknown}")
     String otherServiceUrl;
@@ -85,5 +89,17 @@ public class HelloController {
             this.id = id;
             this.name = name;
         }
+    }
+
+    @GetMapping("/forceReturn")
+    public ApiResult<?> forceReturn(){
+        Object result = helloService.forceReturnExam();
+        return ApiResult.ok(result);
+    }
+
+    @GetMapping("/anno")
+    public ApiResult<?> anno(){
+        Object result = helloService.anno();
+        return ApiResult.ok(result);
     }
 }

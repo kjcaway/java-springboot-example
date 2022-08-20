@@ -30,7 +30,7 @@
     </Appenders>
 
     <Loggers>
-        <Root level="debug" additivity="false" >
+        <Root level="info" additivity="false" >
             <AppenderRef ref="console" />
             <AppenderRef ref="file" />
         </Root>
@@ -49,6 +49,11 @@
         <logger name="me.javaexample.javademo.aop.AuditLogAop" level="info" additivity="false" >
             <AppenderRef ref="console" />
             <AppenderRef ref="auditLogFile" />
+        </logger>
+
+        <!-- temp logger setup -->
+        <logger name="me.anno" level="info" additivity="false" >
+            <AppenderRef ref="console" />
         </logger>
     </Loggers>
 </Configuration>
