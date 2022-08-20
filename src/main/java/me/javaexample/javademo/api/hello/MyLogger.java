@@ -1,7 +1,7 @@
 package me.javaexample.javademo.api.hello;
 
-import me.anno.MyLog;
+// import me.anno.MyLog;
 
-@MyLog
+// @MyLog
 public interface MyLogger {
 }
