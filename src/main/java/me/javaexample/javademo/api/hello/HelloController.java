@@ -97,9 +97,9 @@ public class HelloController {
         return ApiResult.ok(result);
     }
 
-    @GetMapping("/anno")
-    public ApiResult<?> anno(){
-        Object result = helloService.anno();
+    @GetMapping("/mylog")
+    public ApiResult<?> mylog(){
+        Object result = helloService.myLogTest();
         return ApiResult.ok(result);
     }
 }
