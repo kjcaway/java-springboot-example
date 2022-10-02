@@ -33,6 +33,10 @@ dependencies {
 	/** mysql **/
 	implementation 'mysql:mysql-connector-java'
 
+	/** redis **/
+	/** for using me.annot ?? **/
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
 	/** lombok **/
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -49,6 +53,13 @@ dependencies {
 
 	implementation 'me.anno:anno-aop:1.0-SNAPSHOT'
 	annotationProcessor 'me.anno:anno-processor:1.0-SNAPSHOT'
+	//compile 'me.anno:anno-processor:1.0-SNAPSHOT'
+
+	/** aspect maven plugin **/
+//	compile group: 'org.aspectj', name: 'aspectjrt', version: '1.8.9'
+//	compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.8.9'
+
+	implementation 'org.springframework:spring-instrument'
 
 	/** test **/
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -77,7 +88,18 @@ compileQuerydsl { // (7)
 /** * comileQuerydsl.doFirst 추가 */
 compileQuerydsl.doFirst { if(file(querydslDir).exists() ) delete(file(querydslDir)) }
 
+//bootRun.doFirst {
+//	def instrumentLib = instrumentLibPath()
+//	// jvmArgs "-javaagent:${instrumentLib}"
+//}
+
 test {
 	enabled = false
 	useJUnitPlatform()
 }
+
+//File instrumentLibPath(){
+//	return sourceSets.getByName("main").compileClasspath.find {
+//		cls -> return cls.getName().contains("spring-instrument")
+//	}
+//}
