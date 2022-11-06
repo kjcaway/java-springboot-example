@@ -6,3 +6,9 @@ logging:
 
 demo:
   api: /api/v1
+
+
+mylog:
+  redis:
+    host: localhost
+    port: 6379
