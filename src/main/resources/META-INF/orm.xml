@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+                                     http://xmlns.jcp.org/xml/ns/persistence/orm_2_0.xsd" version="2.1">
+
+    <!-- JPA Named Queries -->
+    <named-native-query name="TblMember.selectByKeyword" result-class="me.javaexample.javademo.api.member.repository.TblMember">
+        <query>
+            <![CDATA[
+			SELECT m.*
+			FROM tbl_member m
+			INNER JOIN tbl_category c ON c.category_id = m.category
+			WHERE m.name LIKE CONCAT(:keyword, '%')
+			]]>
+        </query>
+    </named-native-query>
+
+</entity-mappings>

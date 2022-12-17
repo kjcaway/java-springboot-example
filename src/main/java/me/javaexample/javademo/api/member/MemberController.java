@@ -40,9 +40,15 @@ public class MemberController {
 
     @GetMapping("/paging")
     public ApiResult<?> getMembersPaging(Pageable pageable,
-                                    @RequestParam(required = false, defaultValue = "0") int page,
-                                    @RequestParam(required = false, defaultValue = "10") int size) {
+                                         @RequestParam(required = false, defaultValue = "0") int page,
+                                         @RequestParam(required = false, defaultValue = "10") int size) {
         Map<?, ?> result = memberService.getMembersPaging(pageable);
+        return ApiResult.ok(result);
+    }
+
+    @GetMapping("/namedQuery")
+    public ApiResult<?> getMembersNamedQuery(@RequestParam(required = true) String keyword) {
+        List<MemberDto> result = memberService.getMembersNamedQuery(keyword);
         return ApiResult.ok(result);
     }
 }
