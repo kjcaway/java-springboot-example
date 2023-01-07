@@ -19,6 +19,14 @@ public class JsonUtils {
         }
     }
 
+    public static <T> T convertToObject(String json, TypeReference<T> type) throws Exception {
+        try {
+            return objectMapper.readValue(json, type);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
     public static String convertToJsonStr(Object obj) throws Exception {
         try {
             return objectMapper.writeValueAsString(obj);
