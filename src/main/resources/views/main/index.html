@@ -42,11 +42,19 @@
 
             <h2>메인 컨텐츠 제목1</h2>
             <p>메인 컨텐츠1</p>
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary" id="popupBtn" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        팝업 띄우기
+                    </button>
+                </div>
+            </div>
 
             <div class="line"></div>
 
             <h2>메인 컨텐츠 제목2</h2>
             <p>메인컨텐츠2</p>
+
 
             <div class="row mt-5">
                 <div class="col-md-4">
@@ -81,9 +89,51 @@
             </div>
         </div>
     </div>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    팝업입니다.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="noticeModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noticeTitle">Notice</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    안내.
+                </div>
+                <div class="modal-footer">
+                    <div class="input-group mb-3">
+                        <input type="checkbox" aria-label="Checkbox for following text input" id="noticeTodayCloseChk">
+                        오늘 하루 보지 않기(X)
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Common -->
     <script src="../lib/jquery.min.js"></script>
+    <script src="../lib/jquery.cookie.js"></script>
     <script src="../lib/bootstrap.min.js"></script>
     <script src="../components/config.js"></script>
     <!-- Main -->
