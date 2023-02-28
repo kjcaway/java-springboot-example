@@ -64,6 +64,12 @@ dependencies {
 	/** test **/
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	/** testcontainers **/
+	testImplementation "org.testcontainers:testcontainers:1.17.6"
+	testImplementation "org.testcontainers:junit-jupiter:1.17.6"
+	testImplementation "org.testcontainers:mysql:1.17.6"
+
+
 }
 
 def querydslDir = "$buildDir/generated/querydsl" // (3)
@@ -94,7 +100,7 @@ compileQuerydsl.doFirst { if(file(querydslDir).exists() ) delete(file(querydslDi
 //}
 
 test {
-	enabled = false
+	enabled = true
 	useJUnitPlatform()
 }
 
