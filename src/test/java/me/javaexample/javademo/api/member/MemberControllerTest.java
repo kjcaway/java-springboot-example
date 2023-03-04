@@ -3,6 +3,7 @@ package me.javaexample.javademo.api.member;
 import me.javaexample.javademo.api.IntegrationTest;
 import me.javaexample.javademo.api.member.dto.MemberDto;
 import me.javaexample.javademo.api.member.service.MemberService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,6 +18,7 @@ class MemberControllerTest extends IntegrationTest {
     void getMembers() {
         System.out.println("StartTest!");
         List<MemberDto> mList = memberService.getMembers();
-        System.out.println(mList);
+
+        Assertions.assertEquals(mList.size(), 2);
     }
 }
