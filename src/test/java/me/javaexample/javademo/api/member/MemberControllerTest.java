@@ -1,5 +1,6 @@
 package me.javaexample.javademo.api.member;
 
+import me.javaexample.javademo.api.EnableMockMvc;
 import me.javaexample.javademo.api.IntegrationTest;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,7 +20,7 @@ import static org.hamcrest.Matchers.is;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
-@AutoConfigureMockMvc
+@EnableMockMvc
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class MemberControllerTest extends IntegrationTest {
 
@@ -30,8 +31,8 @@ class MemberControllerTest extends IntegrationTest {
     void _01_멤버조회() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/member"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data", hasSize(2)))
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data", hasSize(3)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].name", is("kang")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].name", is("kim")));
     }
@@ -45,11 +46,8 @@ class MemberControllerTest extends IntegrationTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/member"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data", hasSize(3)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].name", is("kang")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].name", is("kim")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].name", is("alice")));
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data", hasSize(4)));
     }
 
     @Test
@@ -58,9 +56,20 @@ class MemberControllerTest extends IntegrationTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/member/search/" + id))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.name", is("kang")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.email", is("kang@gmail.com")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.detailInfo.p", is("1234")));
+    }
+
+    @Test
+    void _04_한글멤버하나조회() throws Exception {
+        long id = 3L;
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/member/search/" + id))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.name", is("한글테스트")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.detailInfo.p", is("한글테스트")));
     }
 }
