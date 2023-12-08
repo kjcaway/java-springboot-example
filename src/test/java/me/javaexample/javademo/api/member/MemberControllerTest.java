@@ -14,8 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
@@ -28,7 +28,6 @@ class MemberControllerTest extends IntegrationTest {
 
     @Test
     void _01_멤버조회() throws Exception {
-
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/member"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
@@ -39,10 +38,9 @@ class MemberControllerTest extends IntegrationTest {
 
     @Test
     void _02_멤버추가() throws Exception {
-
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/member")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\":\"alice\", \"email\":\"alice@gmail.com\", \"category\":\"M001\"}"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\":\"alice\", \"email\":\"alice@gmail.com\", \"category\":\"M001\"}"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/member"))
@@ -52,5 +50,17 @@ class MemberControllerTest extends IntegrationTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].name", is("kang")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].name", is("kim")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data[2].name", is("alice")));
+    }
+
+    @Test
+    void _03_멤버하나조회() throws Exception {
+        long id = 1L;
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/member/search/" + id))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.name", is("kang")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.email", is("kang@gmail.com")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.detailInfo.p", is("1234")));
     }
 }
