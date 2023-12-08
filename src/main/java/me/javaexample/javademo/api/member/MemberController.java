@@ -2,6 +2,7 @@ package me.javaexample.javademo.api.member;
 
 import lombok.RequiredArgsConstructor;
 import me.javaexample.javademo.api.base.ApiResult;
+import me.javaexample.javademo.api.member.dto.MemberDetailDto;
 import me.javaexample.javademo.api.member.dto.MemberDto;
 import me.javaexample.javademo.api.member.service.MemberService;
 import org.apache.logging.log4j.LogManager;
@@ -35,6 +36,12 @@ public class MemberController {
     @GetMapping("/search")
     public ApiResult<?> getMembersByCategory(@RequestParam String category) {
         List<MemberDto> result = memberService.getMembersByCategory(category);
+        return ApiResult.ok(result);
+    }
+
+    @GetMapping("/search/{id}")
+    public ApiResult<?> getMember(@PathVariable Long id) {
+        MemberDetailDto result = memberService.getMember(id);
         return ApiResult.ok(result);
     }
 

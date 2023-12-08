@@ -1,20 +1,17 @@
 package me.javaexample.javademo.api.member.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.mysql.cj.util.StringUtils;
 import lombok.RequiredArgsConstructor;
+import me.javaexample.javademo.api.member.dto.MemberDetailDto;
 import me.javaexample.javademo.api.member.dto.MemberDto;
-import me.javaexample.javademo.api.member.repository.TblMember;
-import me.javaexample.javademo.api.member.repository.TblMemberQueryRepository;
-import me.javaexample.javademo.api.member.repository.TblMemberRepository;
+import me.javaexample.javademo.api.member.repository.*;
+import me.javaexample.javademo.exception.CustomException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MemberService {
     private final TblMemberRepository memberRepository;
+    private final TblMemberDetailRepository memberDetailRepository;
     private final TblMemberQueryRepository memberQueryRepository;
     private final EntityManager em;
 
@@ -40,6 +38,18 @@ public class MemberService {
                 .map(MemberDto::new)
                 .collect(Collectors.toList());
         return result;
+    }
+
+    public MemberDetailDto getMember(Long id) {
+        try {
+            TblMember member = memberRepository.findById(id)
+                    .orElseThrow(CustomException::new);
+            TblMemberDetail memberDetail = memberDetailRepository.findFirstByMemberId(id);
+            return new MemberDetailDto(member, memberDetail);
+
+        } catch (Exception e) {
+            throw new CustomException(e.getMessage());
+        }
     }
 
     public Map<String, ?> getMembersPaging(Pageable pageable) {
