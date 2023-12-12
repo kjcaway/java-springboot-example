@@ -3,7 +3,7 @@
 ---------------------
 
 ## Description
-Made to figure out how to use java, springboot(mvc), etc.
+Made to figure out how to use java, springboot mvc.
 
 ## Environment
 - java 11
@@ -14,15 +14,17 @@ Made to figure out how to use java, springboot(mvc), etc.
 - gradle 7.3
 - mysql 8.0.28
 
-## What Sampling
+## Sampling What?
 - JPA
 - QueryDSL
+- SQL with META-INF/orm.xml
 - AOP with Annotation
 - Handle static resource
 - Basic Api Response
 - Handle custom exception with @ExceptionHandler
 - Log4j2
 - Utils
+- Test with TestContainers
 - Docker build
     ```bash
   docker build -t {imageName}:{version} .
