@@ -3,6 +3,7 @@ package me.javaexample.javademo.api.member;
 import me.javaexample.javademo.api.EnableMockMvc;
 import me.javaexample.javademo.api.IntegrationTest;
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
+@Tag("api")
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
 @EnableMockMvc
