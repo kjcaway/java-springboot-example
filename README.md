@@ -21,6 +21,7 @@ Made to figure out how to use java, springboot mvc.
 - AOP with Annotation
 - Handle static resource
 - Basic Api Response
+- ThreadLocal
 - Handle custom exception with @ExceptionHandler
 - Log4j2
 - Utils

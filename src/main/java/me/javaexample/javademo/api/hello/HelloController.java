@@ -6,6 +6,8 @@ import me.javaexample.javademo.api.base.ApiResult;
 import me.javaexample.javademo.api.hello.service.HelloService;
 import me.javaexample.javademo.config.AppConfig;
 import me.javaexample.javademo.exception.CustomException;
+import me.javaexample.javademo.threadlocal.ContextHolder;
+import me.javaexample.javademo.threadlocal.RequestInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -78,6 +85,18 @@ public class HelloController {
         logger.info(appConfig.toString());
         return ApiResult.ok(Map.of("appConfig.userName", appConfig.getUserName(),
                                     "appConfig.userPassword", appConfig.getUserPassword()));
+    }
+
+    @GetMapping("/contextholder")
+    public ApiResult<?> contextholder() {
+        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        String uuid = UUID.randomUUID().toString();
+        ContextHolder.setRequestInfo(new RequestInfo(uuid, request.getRequestURL().toString(), request.getMethod()));
+
+        // if destroy stored data
+        // ContextHolder.removeRequestInfo();
+
+        return ApiResult.ok(ContextHolder.getRequestInfo());
     }
 
     // Sample Response DTO
