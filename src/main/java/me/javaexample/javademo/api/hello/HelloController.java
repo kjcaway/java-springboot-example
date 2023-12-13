@@ -71,7 +71,7 @@ public class HelloController {
             Member member = new Member(id,"test");
             return ApiResult.ok(member);
         } catch (Exception ex){
-            throw new CustomException("Something was wrong!");
+            throw new CustomException("Something was wrong!", ex);
         }
     }
 

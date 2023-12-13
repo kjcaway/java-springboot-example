@@ -15,7 +15,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
     ResponseEntity<?> handleCustomException(CustomException ex){
-        logger.error("Error message: " + ex.getErrorMessage());
+        logger.error(ex.getErrorMessage(), ex);
 
         return new ResponseEntity<>(ApiResult.error(ex.getErrorMessage()), HttpStatus.OK);
     }

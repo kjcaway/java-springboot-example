@@ -1,5 +1,8 @@
 package me.javaexample.javademo.exception;
 
+import lombok.Getter;
+
+@Getter
 public class CustomException extends RuntimeException {
     private String errorMessage;
 
@@ -9,7 +12,9 @@ public class CustomException extends RuntimeException {
         this.errorMessage = errorMessage;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public CustomException(String errorMessage, Throwable e) {
+        super(errorMessage, e);
+        this.errorMessage = errorMessage;
     }
+
 }
