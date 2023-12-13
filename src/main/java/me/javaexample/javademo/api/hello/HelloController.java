@@ -3,6 +3,7 @@ package me.javaexample.javademo.api.hello;
 import lombok.RequiredArgsConstructor;
 import me.javaexample.javademo.annotation.AuditLogAnnotation;
 import me.javaexample.javademo.api.base.ApiResult;
+import me.javaexample.javademo.api.hello.dto.Member;
 import me.javaexample.javademo.api.hello.service.HelloService;
 import me.javaexample.javademo.config.AppConfig;
 import me.javaexample.javademo.exception.CustomException;
@@ -104,17 +105,6 @@ public class HelloController {
         // ContextHolder.removeRequestInfo();
 
         return ApiResult.ok(ContextHolder.getRequestInfo());
-    }
-
-    // Sample Response DTO
-    class Member{
-        public int id;
-        public String name;
-
-        Member(int id, String name){
-            this.id = id;
-            this.name = name;
-        }
     }
 
     @GetMapping("/forceReturn")
