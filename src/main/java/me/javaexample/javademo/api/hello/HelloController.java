@@ -8,12 +8,15 @@ import me.javaexample.javademo.config.AppConfig;
 import me.javaexample.javademo.exception.CustomException;
 import me.javaexample.javademo.threadlocal.ContextHolder;
 import me.javaexample.javademo.threadlocal.RequestInfo;
+import me.javaexample.javademo.util.ResourceUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,10 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -120,5 +127,26 @@ public class HelloController {
     public ApiResult<?> mylog(){
         Object result = helloService.myLogTest();
         return ApiResult.ok(result);
+    }
+
+    @GetMapping("/filedownload")
+    public ResponseEntity<Resource> fileDownLoad() {
+        try {
+            File file = ResourceUtils.getFileFromResource("/views/templates/template-1.html");
+            String contents = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+
+            logger.info("fileName: " + file.getName() + ", contents: \n" + contents);
+
+            InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+            return ResponseEntity
+                    .ok()
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .cacheControl(CacheControl.noCache())
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getName())
+                    .body(resource);
+        } catch (IOException e) {
+            throw new CustomException("Something was wrong!", e);
+        }
     }
 }
