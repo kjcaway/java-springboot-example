@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class AuditLog {
+
     private String time;
     private String action;
     private String path;

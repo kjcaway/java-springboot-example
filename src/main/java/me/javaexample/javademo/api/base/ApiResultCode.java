@@ -5,7 +5,7 @@ public enum ApiResultCode {
     FAIL("FAIL"),
     UNKNOWN("UNKNOWN");
 
-    ApiResultCode(String value){
+    ApiResultCode(String value) {
         this.value = value;
     }
 

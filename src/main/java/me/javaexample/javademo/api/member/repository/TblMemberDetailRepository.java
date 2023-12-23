@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TblMemberDetailRepository extends JpaRepository<TblMemberDetail, Long> {
+
     TblMemberDetail findFirstByMemberId(Long id);
 }

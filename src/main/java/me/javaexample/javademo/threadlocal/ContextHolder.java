@@ -1,6 +1,7 @@
 package me.javaexample.javademo.threadlocal;
 
 public class ContextHolder {
+
     private static final ThreadLocal<RequestInfo> REQ_INFO = ThreadLocal.withInitial(() -> null);
 
     public static void setRequestInfo(RequestInfo requestInfo) {

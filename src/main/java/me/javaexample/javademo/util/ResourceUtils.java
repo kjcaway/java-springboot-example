@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ResourceUtils {
+
     public static File getFileFromResource(String filePath) throws IOException {
 
         InputStream inputStream = new ClassPathResource(filePath).getInputStream();

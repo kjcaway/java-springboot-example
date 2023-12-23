@@ -15,6 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity(name = "tbl_member")
 public class TblMember {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -31,13 +32,13 @@ public class TblMember {
     @Transient
     private String categoryName;
 
-    public TblMember(MemberDto dto){
+    public TblMember(MemberDto dto) {
         this.name = dto.getName();
         this.email = dto.getEmail();
         this.category = dto.getCategory();
     }
 
-    public TblMember(Tuple tuple){
+    public TblMember(Tuple tuple) {
         this.id = tuple.get(0, Long.class);
         this.name = tuple.get(1, String.class);
         this.email = tuple.get(2, String.class);

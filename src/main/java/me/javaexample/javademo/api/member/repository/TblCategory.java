@@ -14,6 +14,7 @@ import javax.persistence.Id;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity(name = "tbl_category")
 public class TblCategory {
+
     @Id
     @Column(name = "category_id")
     private String categoryId;

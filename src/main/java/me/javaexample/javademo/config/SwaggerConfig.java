@@ -11,22 +11,23 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class SwaggerConfig {
+
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.OAS_30)
-                .useDefaultResponseMessages(false)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("me.javaexample.javademo.api"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(apiInfo());
+            .useDefaultResponseMessages(false)
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("me.javaexample.javademo.api"))
+            .paths(PathSelectors.any())
+            .build()
+            .apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Sample Swagger")
-                .description("description!!!")
-                .version("1.0")
-                .build();
+            .title("Sample Swagger")
+            .description("description!!!")
+            .version("1.0")
+            .build();
     }
 }

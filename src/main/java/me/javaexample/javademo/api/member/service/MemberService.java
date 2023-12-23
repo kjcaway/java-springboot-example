@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class MemberService {
+
     private final TblMemberRepository memberRepository;
     private final TblMemberDetailRepository memberDetailRepository;
     private final TblMemberQueryRepository memberQueryRepository;
@@ -26,24 +27,24 @@ public class MemberService {
 
     public List<MemberDto> getMembers() {
         List<MemberDto> result = memberRepository.findAll()
-                .stream()
-                .map(MemberDto::new)
-                .collect(Collectors.toList());
+            .stream()
+            .map(MemberDto::new)
+            .collect(Collectors.toList());
         return result;
     }
 
     public List<MemberDto> getMembersByCategory(String category) {
         List<MemberDto> result = memberQueryRepository.findMemberByCategory(category)
-                .stream()
-                .map(MemberDto::new)
-                .collect(Collectors.toList());
+            .stream()
+            .map(MemberDto::new)
+            .collect(Collectors.toList());
         return result;
     }
 
     public MemberDetailDto getMember(Long id) {
         try {
             TblMember member = memberRepository.findById(id)
-                    .orElseThrow(CustomException::new);
+                .orElseThrow(CustomException::new);
             TblMemberDetail memberDetail = memberDetailRepository.findFirstByMemberId(id);
             return new MemberDetailDto(member, memberDetail);
 
@@ -55,23 +56,22 @@ public class MemberService {
     public Map<String, ?> getMembersPaging(Pageable pageable) {
         Page<TblMember> page = memberQueryRepository.findMemberByPage(pageable);
         List<MemberDto> result = page
-                .stream()
-                .map(MemberDto::new)
-                .collect(Collectors.toList());
-
+            .stream()
+            .map(MemberDto::new)
+            .collect(Collectors.toList());
 
         return Map.of(
-                "list", result,
-                "totalcount", page.getTotalElements()
+            "list", result,
+            "totalcount", page.getTotalElements()
         );
     }
 
     public List<MemberDto> getMembersNamedQuery(String keyword) {
         List<MemberDto> result = em.createNamedQuery("TblMember.selectByKeyword", TblMember.class)
-                .setParameter("keyword", keyword)
-                .getResultStream()
-                .map(MemberDto::new)
-                .collect(Collectors.toList());
+            .setParameter("keyword", keyword)
+            .getResultStream()
+            .map(MemberDto::new)
+            .collect(Collectors.toList());
         return result;
     }
 

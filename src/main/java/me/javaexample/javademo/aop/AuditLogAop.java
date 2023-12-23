@@ -22,10 +22,11 @@ import java.lang.reflect.Method;
 @Aspect
 @Component
 public class AuditLogAop {
+
     private static final Logger logger = LogManager.getLogger(AuditLogAop.class);
 
     @Around("@annotation(me.javaexample.javademo.annotation.AuditLogAnnotation)")
-    public Object writeAuditLog(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
+    public Object writeAuditLog(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
 
@@ -44,12 +45,12 @@ public class AuditLogAop {
             auditLog.setPath(request.getRequestURI());
             auditLog.setRemoteAddr(request.getRemoteAddr());
             auditLog.setTime(DateUtils.getNowTimeStr());
-            auditLog.setSpendTime(end-start);
+            auditLog.setSpendTime(end - start);
             auditLog.setAction(annotation.value());
-            if(!request.getParameterMap().isEmpty()){
+            if (!request.getParameterMap().isEmpty()) {
                 auditLog.setParams(JsonUtils.convertToJsonStr(request.getParameterMap()));
             }
-            if(response != null){
+            if (response != null) {
                 auditLog.setResult(response.getStatus());
             }
 

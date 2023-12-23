@@ -15,42 +15,45 @@ import java.util.stream.Collectors;
 @Repository
 @RequiredArgsConstructor
 public class TblMemberQueryRepository {
+
     private final JPAQueryFactory jpaQueryFactory;
 
-    public List<TblMember> findMemberByCategory(String category){
+    public List<TblMember> findMemberByCategory(String category) {
         QTblMember qTblMember = QTblMember.tblMember;
         QTblCategory qTblCategory = QTblCategory.tblCategory;
 
-        List<Tuple> list =  jpaQueryFactory.select(qTblMember.id, qTblMember.name, qTblMember.email, qTblMember.category, qTblCategory.name)
-                .from(qTblMember)
-                .innerJoin(qTblCategory)
-                .on(qTblCategory.categoryId.eq(qTblMember.category))
-                .where(qTblMember.category.eq(category))
-                .fetch();
+        List<Tuple> list = jpaQueryFactory.select(qTblMember.id, qTblMember.name, qTblMember.email,
+                qTblMember.category, qTblCategory.name)
+            .from(qTblMember)
+            .innerJoin(qTblCategory)
+            .on(qTblCategory.categoryId.eq(qTblMember.category))
+            .where(qTblMember.category.eq(category))
+            .fetch();
 
         return list.stream()
-                .map(TblMember::new)
-                .collect(Collectors.toList());
+            .map(TblMember::new)
+            .collect(Collectors.toList());
     }
 
 
-    public Page<TblMember> findMemberByPage(Pageable pageable){
+    public Page<TblMember> findMemberByPage(Pageable pageable) {
         QTblMember qTblMember = QTblMember.tblMember;
         QTblCategory qTblCategory = QTblCategory.tblCategory;
 
-        QueryResults<Tuple> result = jpaQueryFactory.select(qTblMember.id, qTblMember.name, qTblMember.email, qTblMember.category, qTblCategory.name)
-                .from(qTblMember)
-                .innerJoin(qTblCategory)
-                .on(qTblCategory.categoryId.eq(qTblMember.category))
-                .limit(pageable.getPageSize())
-                .offset(pageable.getOffset())
-                .orderBy(qTblMember.id.desc())
-                .fetchResults();
+        QueryResults<Tuple> result = jpaQueryFactory.select(qTblMember.id, qTblMember.name,
+                qTblMember.email, qTblMember.category, qTblCategory.name)
+            .from(qTblMember)
+            .innerJoin(qTblCategory)
+            .on(qTblCategory.categoryId.eq(qTblMember.category))
+            .limit(pageable.getPageSize())
+            .offset(pageable.getOffset())
+            .orderBy(qTblMember.id.desc())
+            .fetchResults();
 
         List<TblMember> list = result.getResults()
-                .stream()
-                .map(TblMember::new)
-                .collect(Collectors.toList());
+            .stream()
+            .map(TblMember::new)
+            .collect(Collectors.toList());
 
         return new PageImpl<>(list, pageable, result.getTotal());
     }

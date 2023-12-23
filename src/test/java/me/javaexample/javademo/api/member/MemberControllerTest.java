@@ -32,24 +32,24 @@ class MemberControllerTest extends IntegrationTest {
     @Test
     void _01_멤버조회() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/member"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data", hasSize(3)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].name", is("kang")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].name", is("kim")));
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data", hasSize(3)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].name", is("kang")))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data[1].name", is("kim")));
     }
 
     @Test
     void _02_멤버추가() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/member")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"name\":\"alice\", \"email\":\"alice@gmail.com\", \"category\":\"M001\"}"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"alice\", \"email\":\"alice@gmail.com\", \"category\":\"M001\"}"))
+            .andExpect(MockMvcResultMatchers.status().isOk());
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/member"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data", hasSize(4)));
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data", hasSize(4)));
     }
 
     @Test
@@ -57,11 +57,11 @@ class MemberControllerTest extends IntegrationTest {
         long id = 1L;
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/member/search/" + id))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.name", is("kang")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.email", is("kang@gmail.com")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.detailInfo.p", is("1234")));
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.name", is("kang")))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.email", is("kang@gmail.com")))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.detailInfo.p", is("1234")));
     }
 
     @Test
@@ -69,9 +69,9 @@ class MemberControllerTest extends IntegrationTest {
         long id = 3L;
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/member/search/" + id))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.name", is("한글테스트")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.detailInfo.p", is("한글테스트")));
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.name", is("한글테스트")))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.data.detailInfo.p", is("한글테스트")));
     }
 }

@@ -49,57 +49,59 @@ public class HelloController {
     AppConfig appConfig;
 
     @GetMapping()
-    public String hello(){
+    public String hello() {
         logger.info("request /hello!");
         return "Hello World!";
     }
 
     @GetMapping("/500")
-    public ResponseEntity<String> error(){
+    public ResponseEntity<String> error() {
         logger.error("occur error!");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something was wrong!");
     }
 
     @AuditLogAnnotation("test")
     @GetMapping("/audit")
-    public String audit(){
+    public String audit() {
         return "This is audit log test!";
     }
 
     @GetMapping("/json")
-    public ApiResult<?> json(){
-        Member member = new Member(1,"test");
+    public ApiResult<?> json() {
+        Member member = new Member(1, "test");
         return ApiResult.ok(member);
     }
 
     @GetMapping("/exception/{value}")
-    public ApiResult<?> exception(@PathVariable String value){
+    public ApiResult<?> exception(@PathVariable String value) {
         try {
             int id = Integer.parseInt(value);
-            Member member = new Member(id,"test");
+            Member member = new Member(id, "test");
             return ApiResult.ok(member);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             throw new CustomException("Something was wrong!", ex);
         }
     }
 
     @GetMapping("/proptest")
-    public ApiResult<?> proptest(){
+    public ApiResult<?> proptest() {
         return ApiResult.ok(Map.of("otherServiceUrl", otherServiceUrl));
     }
 
     @GetMapping("/proptest2")
-    public ApiResult<?> proptest2(){
+    public ApiResult<?> proptest2() {
         logger.info(appConfig.toString());
         return ApiResult.ok(Map.of("appConfig.userName", appConfig.getUserName(),
-                                    "appConfig.userPassword", appConfig.getUserPassword()));
+            "appConfig.userPassword", appConfig.getUserPassword()));
     }
 
     @GetMapping("/contextholder")
     public ApiResult<?> contextholder() {
-        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(
+            RequestContextHolder.getRequestAttributes())).getRequest();
         String uuid = UUID.randomUUID().toString();
-        ContextHolder.setRequestInfo(new RequestInfo(uuid, request.getRequestURL().toString(), request.getMethod()));
+        ContextHolder.setRequestInfo(
+            new RequestInfo(uuid, request.getRequestURL().toString(), request.getMethod()));
 
         // if destroy stored data
         // ContextHolder.removeRequestInfo();
@@ -108,13 +110,13 @@ public class HelloController {
     }
 
     @GetMapping("/forceReturn")
-    public ApiResult<?> forceReturn(){
+    public ApiResult<?> forceReturn() {
         Object result = helloService.forceReturnExam();
         return ApiResult.ok(result);
     }
 
     @GetMapping("/mylog")
-    public ApiResult<?> mylog(){
+    public ApiResult<?> mylog() {
         Object result = helloService.myLogTest();
         return ApiResult.ok(result);
     }
@@ -130,11 +132,11 @@ public class HelloController {
             InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
             return ResponseEntity
-                    .ok()
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .cacheControl(CacheControl.noCache())
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getName())
-                    .body(resource);
+                .ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .cacheControl(CacheControl.noCache())
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getName())
+                .body(resource);
         } catch (IOException e) {
             throw new CustomException("Something was wrong!", e);
         }

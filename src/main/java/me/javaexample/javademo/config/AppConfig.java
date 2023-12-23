@@ -26,15 +26,16 @@ public class AppConfig {
     Environment environment;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         this.userName = environment.getProperty("dbUserName");
         this.userPassword = environment.getProperty("dbUserPassword");
     }
 
-    public String getUserName(){
+    public String getUserName() {
         return userName;
     }
-    public String getUserPassword(){
+
+    public String getUserPassword() {
         return userPassword;
     }
 }

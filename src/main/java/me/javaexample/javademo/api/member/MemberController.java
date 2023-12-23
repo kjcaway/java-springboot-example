@@ -17,6 +17,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("${demo.api}/member")
 public class MemberController {
+
     private static final Logger logger = LogManager.getLogger(MemberController.class);
 
     private final MemberService memberService;
@@ -47,8 +48,8 @@ public class MemberController {
 
     @GetMapping("/paging")
     public ApiResult<?> getMembersPaging(Pageable pageable,
-                                         @RequestParam(required = false, defaultValue = "0") int page,
-                                         @RequestParam(required = false, defaultValue = "10") int size) {
+        @RequestParam(required = false, defaultValue = "0") int page,
+        @RequestParam(required = false, defaultValue = "10") int size) {
         Map<?, ?> result = memberService.getMembersPaging(pageable);
         return ApiResult.ok(result);
     }

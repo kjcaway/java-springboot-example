@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class JsonPropertiesParseFactory implements PropertySourceFactory {
+
     @Override
     public PropertySource<?> createPropertySource(String name, EncodedResource resource) throws IOException {
         Map readValue = new ObjectMapper().readValue(resource.getInputStream(), Map.class);

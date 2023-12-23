@@ -13,13 +13,14 @@ import java.util.Map;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MemberDetailDto {
+
     private Long id;
     private String name;
     private String email;
     private String category;
     private String categoryName;
     private String version;
-    private Map<?,?> detailInfo;
+    private Map<?, ?> detailInfo;
 
     public MemberDetailDto(TblMember member, TblMemberDetail detail) throws Exception {
         this.id = member.getId();

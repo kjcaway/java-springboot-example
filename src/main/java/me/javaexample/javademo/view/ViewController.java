@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ViewController {
 
     @GetMapping("/")
-    public String redirect(){
+    public String redirect() {
         return "redirect:/views/main/index.html";
     }
 
     @GetMapping("/views")
-    public String redirect2(){
+    public String redirect2() {
         return "redirect:/views/main/index.html";
     }
 
     @GetMapping("/views/main")
-    public String redirect3(){
+    public String redirect3() {
         return "redirect:/views/main/index.html";
     }
 }

@@ -20,12 +20,12 @@ import org.testcontainers.jdbc.JdbcDatabaseDelegate;
 public abstract class IntegrationTest {
 
     static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:8.0.28")
-            .withDatabaseName("testdbdb")
-            .withUsername("root")
-            .withPassword("root")
-            .withInitScript("testcontainers/mysql/init.sql")        // 스크립트 실행 path는 기본적으로 src/test/resources를 참조
-            .waitingFor(Wait.forHttp("/"))                                // 가용가능 한지 기다렸다가
-            .withReuse(true);                                           // 재사용
+        .withDatabaseName("testdbdb")
+        .withUsername("root")
+        .withPassword("root")
+        .withInitScript("testcontainers/mysql/init.sql")        // 스크립트 실행 path는 기본적으로 src/test/resources를 참조
+        .waitingFor(Wait.forHttp("/"))                                // 가용가능 한지 기다렸다가
+        .withReuse(true);                                           // 재사용
 
 
     @DynamicPropertySource
