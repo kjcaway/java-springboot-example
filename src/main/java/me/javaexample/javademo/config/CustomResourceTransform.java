@@ -20,6 +20,9 @@ public class CustomResourceTransform implements ResourceTransformer {
     @Value("${spring.profiles.active:default}")
     private String activeProfile;
 
+    @Value("${server.port:8080}")
+    private String serverPort;
+
     @Value("${otherservice.url:null}")
     private String serviceUrl;
 
@@ -29,6 +32,10 @@ public class CustomResourceTransform implements ResourceTransformer {
         resourceStr = resourceStr.replace("</body>", "<div style=\"position: absolute; bottom: 5px;\">Author</div>\n</body>");
         resourceStr = resourceStr.replace("##CURRENT_ENV##", activeProfile);
         resourceStr = resourceStr.replace("##OTHER_SERVICE_URL##", serviceUrl);
+
+        if(activeProfile.equals("local")) {
+            resourceStr = resourceStr.replace("##API_DOMAIN##", "localhost" + ":" + serverPort);
+        }
 
         return new TransformedResource(resource, resourceStr.getBytes());
     }
