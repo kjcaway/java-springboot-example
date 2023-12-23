@@ -1,5 +1,14 @@
 server:
   port: 8080
+  tomcat:
+    threads:
+      max: 100                  # default 200
+      min-spare: 5              # default 10
+    max-connections: 8192       # default 8192
+    accept-count: 100           # default 100
+    connection-timeout: 30000   # 30초
+
+
 
 logging:
   config: classpath:log4j2.xml
