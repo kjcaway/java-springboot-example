@@ -34,3 +34,19 @@ Made to figure out how to use java, springboot mvc.
     ```
 - Etc...
 
+## Tips
+- if you want to set max heap size and min heap size
+  ```bash
+  # if using intellij, open edit configuration and set VM Option
+  # default is 1/4 of the physical memory. (default min is 1/64)
+  # if your pc memory is 32GB, default xms is 8GB
+  -Xmx512m 
+  -Xms256m
+  ```
+- if you check heap size
+  ```bash
+  # windows
+  java -XX:+PrintFlagsFinal -version | select-string -pattern heapsize
+  # linux
+  java -XX:+PrintFlagsFinal -version | grep heapsize
+  ````  
