@@ -14,6 +14,11 @@ spring:
       maximum-pool-size: 10
       minimum-idle: 5
       connection-timeout: 3000
+    p6spy:
+      enabled: true
+      appender: com.p6spy.engine.spy.appender.Slf4JLogger
+      logMessageFormat:
+        p6spy: "%(currentTime)|%(executionTime)|%(category)|%(sqlSingleLine)"
 
 logging:
   config: classpath:log4j2.xml
