@@ -50,3 +50,7 @@ Made to figure out how to use java, springboot mvc.
   # linux
   java -XX:+PrintFlagsFinal -version | grep heapsize
   ````  
+- if you add java HttpClient logging option
+  ```bash
+  java -Djdk.httpclient.HttpClient.log=errors,requests,headers,frames[:control:data:window:all],content,ssl,trace,channel,all -jar 
+  ```

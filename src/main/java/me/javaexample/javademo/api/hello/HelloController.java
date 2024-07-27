@@ -1,5 +1,20 @@
 package me.javaexample.javademo.api.hello;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse.BodyHandlers;
+import java.nio.charset.StandardCharsets;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+import javax.net.ssl.SSLContext;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import me.javaexample.javademo.annotation.AuditLogAnnotation;
 import me.javaexample.javademo.api.base.ApiResult;
@@ -17,22 +32,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.*;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -141,5 +151,19 @@ public class HelloController {
         } catch (IOException e) {
             throw new CustomException("Something was wrong!", e);
         }
+    }
+
+    @GetMapping("/httpclient")
+    public ApiResult<?> httpClientTest() throws IOException, InterruptedException, NoSuchAlgorithmException, KeyManagementException {
+        var ssl = SSLContext.getInstance("TLSv1.1");
+        ssl.init(null, null, null);
+        var httpClient = HttpClient.newBuilder().sslContext(ssl).build();
+        var request = HttpRequest.newBuilder()
+            .uri(URI.create("https://browserleaks.com/tls"))
+            .header("Authorization", "Basic test")
+            .GET().build();
+        var resp = httpClient.send(request, BodyHandlers.ofString());
+
+        return ApiResult.ok(resp.body());
     }
 }
