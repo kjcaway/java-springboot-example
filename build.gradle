@@ -51,9 +51,9 @@ dependencies {
 	implementation 'commons-io:commons-io:2.8.0'
 	implementation 'org.apache.commons:commons-lang3:3.0'
 
-	implementation 'me.anno:anno-aop:1.0-SNAPSHOT'
-	annotationProcessor 'me.anno:anno-processor:1.0-SNAPSHOT'
-	//compile 'me.anno:anno-processor:1.0-SNAPSHOT'
+//	implementation 'me.anno:anno-aop:1.0-SNAPSHOT'
+//	annotationProcessor 'me.anno:anno-processor:1.0-SNAPSHOT'
+//	compile 'me.anno:anno-processor:1.0-SNAPSHOT' // not working
 
 	/** aspect maven plugin **/
 //	compile group: 'org.aspectj', name: 'aspectjrt', version: '1.8.9'

@@ -115,11 +115,12 @@ public class HelloController {
         return ApiResult.ok(result);
     }
 
-    @GetMapping("/mylog")
-    public ApiResult<?> mylog() {
-        Object result = helloService.myLogTest();
-        return ApiResult.ok(result);
-    }
+    /* test for me.anno */
+//    @GetMapping("/mylog")
+//    public ApiResult<?> mylog() {
+//        Object result = helloService.myLogTest();
+//        return ApiResult.ok(result);
+//    }
 
     @GetMapping("/filedownload")
     public ResponseEntity<Resource> fileDownLoad() {

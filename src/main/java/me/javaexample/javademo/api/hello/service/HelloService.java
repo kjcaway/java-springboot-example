@@ -1,6 +1,5 @@
 package me.javaexample.javademo.api.hello.service;
 
-import me.anno.MyLog;
 import me.javaexample.javademo.annotation.ForceReturnAnnotation;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +17,10 @@ public class HelloService {
         return result;
     }
 
-    @MyLog
-    public Object myLogTest(){
-        String result = "anno";
-        return result;
-    }
+    /* test for me.anno */
+//    @MyLog
+//    public Object myLogTest(){
+//        String result = "anno";
+//        return result;
+//    }
 }
