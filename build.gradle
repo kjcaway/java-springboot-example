@@ -71,6 +71,15 @@ dependencies {
 
 	/** p6spy **/
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.1'
+
+	/* for mac os m1,2,3 */
+	if (isAppleSilicon()) {
+		runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.111.Final:osx-aarch_64")
+	}
+}
+
+static def isAppleSilicon() {
+	return System.getProperty("os.name") == "Mac OS X" && System.getProperty("os.arch") == "aarch64"
 }
 
 def querydslDir = "$buildDir/generated/querydsl" // (3)
