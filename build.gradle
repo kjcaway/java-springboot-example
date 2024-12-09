@@ -112,7 +112,7 @@ compileQuerydsl.doFirst { if(file(querydslDir).exists() ) delete(file(querydslDi
 test {
 	enabled = true
 	useJUnitPlatform {
-		includeTags "api" // if use like that, only execute class with @Tag.
+		includeTags "api", "unit" // if use like that, only execute class with @Tag.
 	}
 	testLogging {
 		events "passed", "skipped", "failed" // only logging pass, skipped and failed events
