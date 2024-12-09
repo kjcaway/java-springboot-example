@@ -27,12 +27,19 @@ Made to figure out how to use java, springboot mvc.
 - Utils
 - Test with TestContainers
 - Docker build
+- Csv read / write
     ```bash
   docker build -t {imageName}:{version} .
   docker run -d -p 8080:8080 {imageName}:{version}
   docker ps
     ```
 - Etc...
+
+### It is necessary to build
+```text
+1. docker or docker desktop
+2. jdk 11 ⬆️
+```
 
 ## Tips
 - if you want to set max heap size and min heap size

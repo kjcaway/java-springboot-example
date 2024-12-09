@@ -89,7 +89,7 @@ public class HelloController {
             Member member = new Member(id, "test");
             return ApiResult.ok(member);
         } catch (Exception ex) {
-            throw new CustomException("Something was wrong!", ex);
+            throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR, "Something was wrong!", ex);
         }
     }
 
@@ -149,7 +149,7 @@ public class HelloController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getName())
                 .body(resource);
         } catch (IOException e) {
-            throw new CustomException("Something was wrong!", e);
+            throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR, "Something was wrong!", e);
         }
     }
 

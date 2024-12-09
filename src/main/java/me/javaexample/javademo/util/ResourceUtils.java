@@ -1,12 +1,12 @@
 package me.javaexample.javademo.util;
 
-import me.javaexample.javademo.exception.CustomException;
-import org.apache.commons.io.FileUtils;
-import org.springframework.core.io.ClassPathResource;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import me.javaexample.javademo.exception.CustomException;
+import org.apache.commons.io.FileUtils;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
 
 public class ResourceUtils {
 
@@ -19,7 +19,7 @@ public class ResourceUtils {
 
             return temp;
         } catch (Exception ex) {
-            throw new CustomException("failed to get contents from file");
+            throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR, "failed to get contents from file");
         }
     }
 }

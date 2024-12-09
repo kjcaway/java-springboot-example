@@ -8,6 +8,7 @@ import me.javaexample.javademo.api.member.repository.*;
 import me.javaexample.javademo.exception.CustomException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,7 +50,7 @@ public class MemberService {
             return new MemberDetailDto(member, memberDetail);
 
         } catch (Exception e) {
-            throw new CustomException(e.getMessage());
+            throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 

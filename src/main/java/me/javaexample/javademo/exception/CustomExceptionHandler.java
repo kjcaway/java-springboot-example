@@ -20,4 +20,10 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(ApiResult.error(ex.getErrorMessage()), HttpStatus.OK);
     }
 
+    @ExceptionHandler(RuntimeException.class)
+    ResponseEntity<?> handleRunException(RuntimeException ex) {
+        logger.error(ex.getLocalizedMessage(), ex);
+
+        return new ResponseEntity<>(ApiResult.error(ex.getLocalizedMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
